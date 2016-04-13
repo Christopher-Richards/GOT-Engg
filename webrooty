@@ -1,0 +1,43 @@
+<?php
+$curl_connection = curl_init();
+curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+    curl_setopt($curl_connection, CURLOPT_USERAGENT,
+    "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
+    curl_setopt($curl_connection, CURLOPT_URL, 'https://banner.uregina.ca/prod/sct/bwckschd.p_disp_dyn_sched');
+    curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, 1);
+//curl_setopt ( $curl_connection, CURLOPT_POSTFIELDS, http_build_query($data_fields) );
+ 
+//perform our request
+$result = curl_exec($curl_connection);
+//echo $result;
+
+$dom = new DOMDocument();
+if($dom->loadHTML($result)){
+echo "good";
+echo "<br>";
+}else{
+echo "wtfwhy";
+}
+$select = $dom->getElementById('term_input_id');
+if($select == null){
+echo "null";
+}else{
+echo "not null i guess?";
+echo "<br>";
+echo $select;
+}
+$options = $select->getElementsByTagName('option');
+if ($options->length==0) { 
+   echo "no info back";
+} 
+foreach($options as $option) {
+    //$value = $option->getAttribute('value');
+    //$text = $option->textContent;
+echo "in";
+echo $option->nodeValue;
+    //echo $value;
+    //echo $text;
+}
+?>

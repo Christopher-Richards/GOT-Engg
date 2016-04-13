@@ -1,0 +1,123 @@
+Last login: Mon Jan  4 13:50:54 on console
+Jordan-Cooks-MacBook-Pro:~ cookster404$ cd desktop
+Jordan-Cooks-MacBook-Pro:desktop cookster404$ ssh -i "GOTengg.pem" centos@52.32.14.84
+Last login: Fri Jan  8 02:02:42 2016 from 71-17-26-63.regn.hsdb.sasknet.sk.ca
+[centos@ip-172-31-23-254 ~]$ ls
+bootstrap-3.3.5-dist  Desktop         Music              Templates
+ca.crt                Documents       parse.php          #test.php#
+ca.csr                Downloads       Pictures           test.php
+ca.key                httpd-old.conf  Public             test.php~
+Classes.php           index_2.html    sticky-footer.css  Videos
+[centos@ip-172-31-23-254 ~]$ cd ..
+[centos@ip-172-31-23-254 home]$ cd ..
+[centos@ip-172-31-23-254 /]$ ls
+bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
+boot  etc  lib   media  opt  root  sbin  sys  usr
+[centos@ip-172-31-23-254 /]$ cd var
+[centos@ip-172-31-23-254 var]$ ls
+account  crash  ftp     kerberos  lock  nis       run    var
+adm      db     games   lib       log   opt       spool  www
+cache    empty  gopher  local     mail  preserve  tmp    yp
+[centos@ip-172-31-23-254 var]$ cd www
+[centos@ip-172-31-23-254 www]$ ls
+cakephp  cgi-bin  html  master.zip
+[centos@ip-172-31-23-254 www]$ cd cakephp
+[centos@ip-172-31-23-254 cakephp]$ ls
+composer.json  config  contrib  LICENSE.txt  README.md  src  tests  VERSION.txt
+[centos@ip-172-31-23-254 cakephp]$ cd ..
+[centos@ip-172-31-23-254 www]$ cd html
+[centos@ip-172-31-23-254 html]$ ls
+bootstrap-3.3.5-dist  composer.phar  GOTengg  #test.php#
+[centos@ip-172-31-23-254 html]$ cd GOTengg
+[centos@ip-172-31-23-254 GOTengg]$ ls
+bin            config     logs              plugins    src    tmp     webroot
+composer.json  index.php  phpunit.xml.dist  README.md  tests  vendor  webroot.
+[centos@ip-172-31-23-254 GOTengg]$ ce webroot
+bash: ce: command not found...
+[centos@ip-172-31-23-254 GOTengg]$ ls
+bin            config     logs              plugins    src    tmp     webroot
+composer.json  index.php  phpunit.xml.dist  README.md  tests  vendor  webroot.
+[centos@ip-172-31-23-254 GOTengg]$ cd webroot
+[centos@ip-172-31-23-254 webroot]$ ls
+Classes.php       img          parse.php           StudentText.html~
+css               index.html   parse.php~          StudentTrans.php
+favicon.ico       index.html~  sticky-footer.css   StudentTrans.php~
+formHandler.php   js           #StudentText.html#  test.html
+formHandler.php~  #parse.php#  StudentText.html    test.html~
+[centos@ip-172-31-23-254 webroot]$ cd emacs parse.php
+-bash: cd: emacs: No such file or directory
+[centos@ip-172-31-23-254 webroot]$  emacs parse.php
+
+[1]+  Stopped                 emacs parse.php
+[centos@ip-172-31-23-254 webroot]$ emacs AddScheduel.php
+
+[2]+  Stopped                 emacs AddScheduel.php
+[centos@ip-172-31-23-254 webroot]$ emacs formhandler.php
+
+[3]+  Stopped                 emacs formhandler.php
+[centos@ip-172-31-23-254 webroot]$ emacs formHandler.php
+
+[4]+  Stopped                 emacs formHandler.php
+[centos@ip-172-31-23-254 webroot]$ ls
+Classes.php  formHandler.php   index.html   #parse.php#  sticky-footer.css   StudentText.html~  test.html
+css          formHandler.php~  index.html~  parse.php    #StudentText.html#  StudentTrans.php   test.html~
+favicon.ico  img               js           parse.php~   StudentText.html    StudentTrans.php~
+[centos@ip-172-31-23-254 webroot]$ emacs StudentText.html
+
+[5]+  Stopped                 emacs StudentText.html
+[centos@ip-172-31-23-254 webroot]$ emacs NewScheduel.html
+
+[6]+  Stopped                 emacs NewScheduel.html
+[centos@ip-172-31-23-254 webroot]$ ls
+Classes.php  formHandler.php   index.html   #parse.php#  sticky-footer.css   StudentText.html~  test.html
+css          formHandler.php~  index.html~  parse.php    #StudentText.html#  StudentTrans.php   test.html~
+favicon.ico  img               js           parse.php~   StudentText.html    StudentTrans.php~
+[centos@ip-172-31-23-254 webroot]$ emacs StudentText.html
+
+[7]+  Stopped                 emacs StudentText.html
+[centos@ip-172-31-23-254 webroot]$ emacs NewScheduel.html
+
+[8]+  Stopped                 emacs NewScheduel.html
+[centos@ip-172-31-23-254 webroot]$ sudo emacs NewScheduel.html
+
+[9]+  Stopped                 sudo emacs NewScheduel.html
+[centos@ip-172-31-23-254 webroot]$ sudo emacs AddNewScheduel.php
+
+[10]+  Stopped                 sudo emacs AddNewScheduel.php
+[centos@ip-172-31-23-254 webroot]$ sudo emacs NewScheduel.html
+
+[11]+  Stopped                 sudo emacs NewScheduel.html
+[centos@ip-172-31-23-254 webroot]$ sudo emacs AddNewScheduel.php
+
+[12]+  Stopped                 sudo emacs AddNewScheduel.php
+[centos@ip-172-31-23-254 webroot]$ emacs formHandler.php
+
+File Edit Options Buffers Tools Help                                      
+
+                                                                                                             <?php
+
+$text="";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+   $text=$_POST['studenttext'];        //gets the transcript that was pasted
+   $text=str_replace ("'" , "''" , $text); //replace ' so that sql can query
+
+   $ID = array();
+   preg_match('/\d{9}/', $text, $ID);
+
+   $name=array();
+   preg_match('/Name:(.*?)\n/' , $text, $name);  //extract name from transcript
+
+   $major=array();
+   preg_match('/Major.{7}(.*?)Year/' ,$text, $major); //extract major from transcript
+
+  $startYear=array();   // gets the start year
+  preg_match_all('/(\d{4})\s(Fall|Winter|Spring & Summer)/', $text, $startYear);
+  $year=9999;
+
+  for ($i=0;$i<count($startYear[1]);$i++)
+  {
+        if( $startYear[1][$i]<$year)
+            {
+ 

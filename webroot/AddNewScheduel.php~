@@ -1,0 +1,42 @@
+ <?php
+
+$text="";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+   $text=$_POST['scheduel'];        //gets the scheduel that was pasted
+   $text=str_replace ("'" , "''" , $text); //replace ' so that sql can query
+
+   $major=array();
+   preg_match('/(SOFTWARE SYSTEMS ENGINEERING)|(INDUSTRIAL SYSTEMS ENGINEERING)|(PETROLEUM SYSTEMS ENGINEERING)|(ENVIORMENTAL SYSTEMS ENGINEERING)|(ELECTRONIC SYSTEMS ENGINEERING)/' ,$text, $major); //extract major from the scheduel
+   //echo $major[0];
+
+  $startYear=array();   // gets the start year
+  preg_match('/(\d{4})/', $text, $startYear);
+  //echo $startYear[0];
+
+   $SemesterString=preg_split('/(Semester).*(?:\))/', $text);  
+   //print_r ($SemesterString);
+   echo $SemesterString[1];
+
+
+   //This will loop through the semester array to extract the courses in each semester ( the first position in the array is useless)
+  for ($i=1;$i<count($SemesterString);$i++)
+  {
+	$coursesArray=array();   // gets the courses for the given semester
+  	preg_match_all('/\w{2,4}\s\d{3}(?!\d)/', $SemesterString[$i], $coursesArray);
+        //print_r ($coursesArray);
+	//echo "</br>";
+	$coursesString="";
+	
+		for($j=0;$j<count($coursesArray);$j++)
+		{
+			$coursesString .= $coursesArray[$j];
+			}
+	echo $coursesString;
+
+	}
+
+}
+
+?>

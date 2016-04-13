@@ -1,0 +1,57 @@
+
+                                                                                                             <?php
+
+$text="";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+   $text=$_POST['studenttext'];        //gets the transcript that was pasted
+   $text=str_replace ("'" , "''" , $text); //replace ' so that sql can query
+   
+   $ID = array();
+   preg_match('/\d{9}/', $text, $ID);
+   
+   $name=array();
+   preg_match('/Name:(.*?)\n/' , $text, $name);  //extract name from transcript
+
+   $major=array();
+   preg_match('/Major.{7}(.*?)Year/' ,$text, $major); //extract major from transcript
+   
+  $startYear=array();   // gets the start year
+  preg_match_all('/(\d{4})\s(Fall|Winter|Spring & Summer)/', $text, $startYear);
+  $year=9999;
+  
+  for ($i=0;$i<count($startYear[1]);$i++)
+  {
+	if( $startYear[1][$i]<$year)
+	    {
+		$year=$startYear[1][$i];
+	    }
+}
+
+  $TermString=array();
+  $TermString=preg_split('/(\d{4})\s(Fall|Winter|Spring & Summer)/', $text);
+  print_r($startYear[0]);
+  echo "/n";
+  print_r($TermString);
+  
+  
+
+
+   $db = mysqli_connect("localhost","root","ense400", "StudentInfo" )
+   or die("could not connect to the database: Error " . mysqli_error($db));
+
+                         //adds the information to the database if the data is good
+                         $sql="INSERT INTO StudentInfo (SI,studentstring, name, startYear, major)  VALUES('$ID[0]', '$text','$name[1]','$year','$major[1]')";
+                         mysqli_query($db, $sql);
+                         mysqli_close($db);
+                                                              
+$message ="This info has been added to the database";
+echo $message;
+
+
+}
+
+?>
+</br></br>
+<a href="index.html">Home</a>

@@ -1,0 +1,10 @@
+<html>
+<head></head>
+<body>
+<form action="parse.php" method ="post" id = "testParse">
+  </form>
+
+<button type="submit" form = "testParse" value = "Submit">Submit </button>
+
+</body>
+</html>

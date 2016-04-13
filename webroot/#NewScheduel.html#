@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script>
+function addMore() {
+   
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Add New Scheduel</title>
+</head>
+<body>
+
+<form action="AddNewScheduel.php" method="post">
+  <p>Program name: </p><input type="text" name="program" id="program">
+  <br>
+  <p>Start Year: </p><input type="number" name="year" id="year">
+  <br>
+  <p>List the classes for the given semester. seperate them with a comma</p>
+  <br>
+  <p>Semester 1: </p><textarea name="semester1" id="semester1" rows="6" cols="100"></textarea>
+  <br>
+  <br>
+  <p>Semester 2: </p><textarea name="semester2" id="semester2" rows="6" cols="100"></textarea>
+  <br>
+  <br>
+  <p>Semester 3: </p><textarea name="semester3" id="semester3" rows="6" cols="100"></textarea>
+  <br>
+  <br>
+  <p>Semester 4: </p><textarea name="semester4" id="semester4" rows="6" cols="100"></textarea>
+  <br>
+  <br>
+  <p>Semester 5: </p><textarea name="semester5" id="semester5" rows="6" cols="100"></textarea>
+  <br>
+  <br>
+  <p>Semester 6: </p><textarea name="semester6" id="semester6" rows="6" cols="100"></textarea>
+  <br>
+  <br>
+  <p>Semester 7: </p><textarea name="semester7" id="semester7" rows="6" cols="100"></textarea>
+  <br>
+  <br>
+  <p>Semester 8: </p><textarea name="semester8" id="semester8" rows="6" cols="100"></textarea>
+  <br>
+  <br>
+  <p>Semester 9:</p> <textarea name="semester9" id="semester9" rows="6" cols="100"></textarea>
+  <br>
+  <br>
+  <select>
+  <option value="non_co-op">NON CO-OP</option>
+  <option value="co-op">CO-OP</option>
+  </select>
+  <br>
+  <br>
+  <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

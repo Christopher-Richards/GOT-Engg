@@ -1,0 +1,189 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GOTengg</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <style type="text/css">
+        .carousel-inner > .item > img,
+        .carousel-inner > .item > a > img {
+            width: 75%;
+            margin: auto;
+        }
+textarea {
+    display: block;
+    width: 100%;
+    height: 30%;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+/* Sticky footer styles
+      -------------------------------------------------- */
+
+      html,
+      body {
+        height: 100%;
+        /* The html and body elements cannot have any padding or margin. */
+      }
+
+      /* Wrapper for page content to push down footer */
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        /* Negative indent footer by it's height */
+        margin: 0 auto -60px;
+      }
+
+      /* Set the fixed height of the footer here */
+      #push,
+      #footer {
+        height: 60px;
+      }
+      #footer {
+        background-color: #f5f5f5;
+      }
+
+      /* Lastly, apply responsive CSS fixes as necessary */
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+    </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">GOT-Engg</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+			<li> <a href="Tprogress.php"> Test Progress </a>
+<li> <a href="getCurrentClasses.php"> Test getCurrentClasses (for testing purposes only) </a>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><p class="navbar-text">Already have an account?</p></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                            <ul id="login-dp" class="dropdown-menu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <form>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                                    <div class="input-group-inner">
+                                                        <input type="text" class="form-control" placeholder="Username">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                                    <div class="input-group-inner">
+                                                        <input type="text" class="form-control" placeholder="Password">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="input-group">
+                                                    <div class="input-group-inner">
+                                                        <button type="submit" class="btn btn-primary" style="width: 300px;">Sign in</button>
+
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="bottom text-center">
+                                            Forgot your password? <a href="#"><b>Click Here!</b></a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <br />
+        <br />
+        <br />
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="jumbotron">
+				<h2>
+					Paste the transcript to the area below
+				</h2>
+				<p>
+					We will use this information to determine where you are in your program and help you graduate on time.
+				</p>
+			</div>
+		</div>
+	</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>
+			</h2>
+	<div class="row">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-6">
+					<form role="form" action="homeController.php" method="post">
+						<div class="form-group"> 
+							<textarea class="FormElement" name="studenttext" id="studenttext"></textarea>
+						</div>
+						<div class="pull-right">
+						<button type="submit" class="btn btn-primary btn-large">
+							Submit
+						</button>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-3">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	</div><!--/.fluid-container-->
+	<div class="navbar navbar-inverse navbar-fixed-bottom">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				
+				<p>
+			<small>
+				<em style="color:white;">Developed by:</em> 
+					<a href="#">Chris Richards</a><em style="color:white;">,</em> 
+					<a href="#">Jordan Cook</a>  
+				</small>
+			</p>
+			</div>
+		</div>
+	</div>
+	
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+    </body>
+</html>

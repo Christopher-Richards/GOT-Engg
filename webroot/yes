@@ -1,0 +1,85 @@
+<?php
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+	
+	$text= htmlspecialchars($_POST["classes"]);        //gets the scheduel that was pasted
+	$text=str_replace ("'" , "''" , $text); //replace ' so that sql can query
+
+	
+	preg_match_all('/(\w{2,4}\s\d{3})\s\-/',$text, $className); //gets the semester that the class is offered in
+	//pos 0 contains the year and semester extracted from the regex
+	print_r ($className);
+
+	// extracts the name and title of the offered classes
+	//this is a 2D array : column 0 contains both for each match, column 1 contains the class name and number, column 2 contains the classe title
+	// the rows contain each different class found by the reg ex
+	//print_r ($classes);
+	preg_match_all('/(\d{4})\s(Winter|Fall|Spring & Summer)/', $text, $termName);
+	print_r($termName);
+
+	//$termString = preg_split('/(\w{2,4}\s\d{3})\s\-/',$text); // splits the text into an array containing the text written in between each class
+	//pos 0 is useless since it contains all the text before the first class occures
+	//'/\*{2,3}.*\*{2,3}/'
+	// pos 0 are the required courses and pos 1 are the electives
+	
+	for ($i=0;$i<count($className);$i++) //loops through all the entries to find the pre-reqs for the the classes
+	{
+
+		//preg_match_all('/\d{4}\s(Winter|Fall|Spring & Summer)/', $termString[$i+1], $termName);
+		//print_r($termName);
+		
+		$db = mysqli_connect("localhost","root","ense400", "StudentInfo" )   //connects to the DB
+		or die("could not connect to the database: Error " . mysqli_error($db));
+
+		//Checks if the class is already inserted into the DB
+		$sql="SELECT * FROM CoursesOffered WHERE courseName='".$className[1][$i]."'"; //'AND semester_offered LIKE '".$semesterOffered[0][0]."'";
+		echo $sql ."<br/>";
+		mysql_free_result($result);
+		$result = mysqli_query($db,$sql);
+
+		
+		if (!$result) {
+			die('Query failed to execute for some reason');
+		}
+
+		$row = mysqli_fetch_array($result, MYSQLI_NUM);
+		//printf ("%s (%s)\n", $row[0], $row[1]);
+		
+		$sql= "UPDATE CoursesOffered SET semester_offered = concat( semester_offered,' ". $termName[0][0] ."') WHERE courseName LIKE '%". $className[1][$i] ."%'";
+		echo $sql;
+		
+		if (is_null($row))
+		{
+
+			$sql="INSERT INTO CoursesOffered (courseName,courseTitle,pre_reqs,semester_offered)  VALUES('".$classes[1][$i]."','".$classes[2][$i]."','".$pre_req[1][0]."','".$semesterOffered[0][0]."')";
+			mysqli_query($db, $sql);
+			mysqli_close($db);
+			//echo $sql ."<br/>";
+		}
+
+		else if (  strpos($row['semester_offered'], $termName[0][0] ) ){ //checks if the semeseter is different, if it is, then it is appended
+				
+			$sql= "UPDATE CoursesOffered SET semester_offered = concat( semester_offered,' ". $termName[0][0] ."') WHERE courseName LIKE '%". $className[1][$i] ."%'";
+			echo $sql;
+			mysqli_query($db, $sql);
+			mysqli_close($db);
+		}
+		else {
+
+			echo $row['semester_offered']." </br>" .  $className[1][$i] ." </br>";
+		}
+
+
+		//echo $classes[1][$i] . "<br/>";
+		//echo $classes[2][$i] . "<br/>";
+		//echo $pre_req[1][0];
+		//echo"<br/><br/>";
+
+
+	}
+	echo '<a href="index.html">Home</a>';
+}
+
+?>

@@ -1,0 +1,168 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GOTengg</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <style type="text/css">
+    </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">GOT-Engg</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Help and FAQs</a></li>
+                        
+					<li> <a href="StudentText.html">Admin</a>
+					     	<li> <a href="StudentTrans.php">Student</a>
+						     	  <li> <a href="test.html"> Testing parsing </a>
+                    </ul>
+ </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+</br>
+</br>
+<?php
+
+$db = mysqli_connect("localhost","root","ense400", "StudentInfo" )
+   or die("could not connect to the database: Error " . mysqli_error($db));
+
+ $sql="SELECT * FROM StudenInfo";
+                         mysqli_query($db, $sql);
+                         mysqli_close($db);
+
+function getPostAndParse(){
+$text = $_POST["studenttext"];
+//echo $text;
+//echo "before array";
+$parseText=array();   // gets the start year
+//echo "after array";  
+preg_match_all('/(\d{6}(.*?)\n)/', $text, $parseText);
+//echo "after pregmatch";
+//echo count($parseText[0]);
+//echo $parseText[0][0];
+$temp = $parseText[0][0];
+$pos = strpos($temp, "\t");
+echo $pos;
+$id = substr($temp, 0, $pos);
+global $id = trim($id);
+$temp = substr($temp, $pos + 1, strlen($temp));
+$pos = strpos($temp,"\t");
+$name = substr($temp, 0,$pos);
+global $temp = substr($temp, $pos+1, strlen($temp));
+$pos = strpos($temp,"\t");
+$campus = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $campus;
+$pos = strpos($temp,"\t");
+echo $pos;
+$college = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $college;
+$pos = strpos($temp,"\t");
+echo $pos;
+$degree = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $degree;
+$pos = strpos($temp,"\t");
+echo $pos;
+$major = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $major;
+
+$level = $temp;
+echo $level;
+
+for ($i=1;$i<count($parseText[1]);$i++)
+  {
+  $line = $parseText[0][$i];
+if (strpos($line,'Registered') !== false) {
+   //Currently taking
+$temp = $line;
+   $pos = strpos($temp, "\t");
+echo $pos;
+$code= substr($temp, 0, $pos);
+$code = trim($code);
+echo $code;
+$temp = substr($temp, $pos + 1, strlen($temp));
+//echo $temp;
+$pos = strpos($temp,"\t");
+echo $pos;
+$subject = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $subject;
+$pos = strpos($temp,"\t");
+echo $pos;
+$number = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $number;
+$pos = strpos($temp,"\t");
+echo $pos;
+$title = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $title;
+$pos = strpos($temp,"\t");
+echo $pos;
+$status = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $status;
+$pos = strpos($temp,"\t");
+echo $pos;
+$campus = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $campus;
+$cHours = $temp;
+echo $cHours;
+}else{
+$temp = $line;
+   $pos = strpos($temp, "\t");
+echo $pos;
+$code= substr($temp, 0, $pos);
+$code = trim($code);
+echo $code;
+$temp = substr($temp, $pos + 1, strlen($temp));
+//echo $temp;
+$pos = strpos($temp,"\t");
+echo $pos;
+$subject = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $subject;
+$pos = strpos($temp,"\t");
+echo $pos;
+$number = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $number;
+$pos = strpos($temp,"\t");
+echo $pos;
+$title = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $title;
+$pos = strpos($temp,"\t");
+echo $pos;
+$cHours = substr($temp, 0,$pos);
+$temp = substr($temp, $pos+1, strlen($temp));
+echo $cHours;
+$grade = $temp;
+echo $grade;
+}
+}
+}
+getPostAndParse();
+  ?>
+</body>
+</html>

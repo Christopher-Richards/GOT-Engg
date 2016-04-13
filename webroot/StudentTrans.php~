@@ -1,0 +1,3 @@
+<?php
+echo strip_tags(file_get_contents('https://banner.uregina.ca/prod/sct/ww_ta_trans_v3.uot'));
+?>

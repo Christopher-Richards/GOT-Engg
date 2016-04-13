@@ -1,0 +1,239 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GOTengg</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+	crossorigin="anonymous">
+<style type="text/css">
+.hidden {
+	visibility: hidden;
+}
+
+.invalid {
+	visibility: show;
+	color: red;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+	width: 75%;
+	margin: auto;
+}
+
+textarea {
+	display: block;
+	width: 100%;
+	height: 30%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Sticky footer styles
+      -------------------------------------------------- */
+html, body {
+	height: 100%;
+	/* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	/* Negative indent footer by it's height */
+	margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push, #footer {
+	height: 60px;
+}
+
+#footer {
+	background-color: #f5f5f5;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media ( max-width : 767px) {
+	#footer {
+		margin-left: -20px;
+		margin-right: -20px;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+</style>
+
+
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+	// this function grabs a list of the schedules that are availible
+	$('document').ready(function() {
+
+		$.ajax({
+			type : "POST",
+			url : "ScheduleController.php",
+			data : {
+				functionname : 'listSchedules'
+			},
+			//dataType: "string",
+			// beforeSend: function(html) { // this happens before actual call
+			//     $("#results").html(''); 
+			//   $("#searchresults").show();
+
+			//},
+			success : function(html) { // this happens after we get results
+				// $("#results").show();
+				$("#schedule").append(html);
+			}
+
+		});
+	})
+	
+	
+	// this function will check the form
+	function checkForm(){
+		
+		document.getElementById("tran_check").className = "hidden";
+		document.getElementById("schedule_check").className = "hidden";
+		
+		document.getElementById("tran_check").innerHTML = "";
+		document.getElementById("schedule_check").innerHTML = "";
+		
+		
+		var reg = /\d{9}/g;  // regular expression to check for the SI
+		
+
+		
+		var scheduleId= document.getElementById("schedule").value;
+		var tran = document.getElementById("studenttext").value;
+		var t =0;
+		var s=0;
+		
+		if (! reg.test(tran)){
+			document.getElementById("tran_check").className = "invalid";
+			document.getElementById("tran_check").innerHTML = "*Requires a Student ID";
+			t=1;
+		}
+		
+		if (scheduleId == ""){
+		
+		document.getElementById("schedule_check").className = "invalid";
+		document.getElementById("schedule_check").innerHTML = "*";
+		s=1;
+		}
+		
+		if (t || s){
+			return false;	
+		}else{
+			return true;
+		}
+		
+	}
+	
+</script>
+
+
+
+
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">GOT-Engg</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href=index.html">Home</a></li>
+					<li ><a href="SearchClasses.php">Search Classes</a></li>
+					<li> <a href="Schedules.php">Schedules</a></li>
+				</ul>
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<br />
+	<br />
+	<br />
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="jumbotron">
+					<h2>Let us help you graduate on time.</h2>
+				</div>
+			</div>
+		</div>
+
+
+		<div class='container-fluid'>
+			<div class='row'>
+				<div class='col-md-3'></div>
+				<div class='col-md-6'>
+<h3>Paste your transcript to the text area below</h3>
+<p class="hidden"></p>
+					<form onsubmit="return checkForm()" role="form"
+						action="homeController.php" method="post">
+						<div class="form-group">
+							<textarea class="FormElement" name="studenttext" id="studenttext"></textarea>
+							<p id="schedule_check" class="hidden"></p>
+							<h3>Please Select a Reference Schedule</h3>
+
+							<select name="schedule" class id="schedule">
+								<option value="">Select one</option>
+							</select>
+
+							<div class="pull-right">
+								<button type="submit" class="btn btn-primary btn-large">Submit</button>
+							</div>
+
+						</div>
+				
+				</div>
+			</div>
+
+
+			</form>
+		</div>
+		<div class="col-md-2"></div>
+		<br /> <br /> <br />
+		<!--/.fluid-container-->
+		<div class="navbar navbar-inverse navbar-fixed-bottom">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+
+					<p>
+						<small> <em style="color: white;">Developed by:</em> <a href="#">Chris
+								Richards</a><em style="color: white;">,</em> <a href="#">Jordan
+								Cook</a>
+						</small>
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+			integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+			crossorigin="anonymous"></script>
+
+</body>
+</html>
+
